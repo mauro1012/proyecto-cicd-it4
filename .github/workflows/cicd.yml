@@ -1,19 +1,19 @@
-name: Pipeline CI/CD IT4+
+name: Pipeline CI-CD IT4
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-    - name: Descargar código del repositorio
+    - name: Descargar codigo
       uses: actions/checkout@v3
 
-    - name: Configurar Node.js
+    - name: Configurar Node
       uses: actions/setup-node@v3
       with:
         node-version: 18
@@ -21,24 +21,24 @@ jobs:
     - name: Instalar Dependencias
       run: npm install
 
-    - name: Ejecutar Pruebas Unitarias (Test)
+    - name: Ejecutar Pruebas Unitarias
       run: npm test
 
   deploy-simulation:
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:
-    - name: Descargar código del repositorio
+    - name: Descargar codigo
       uses: actions/checkout@v3
 
-    - name: Simular Construcción de Imagen Docker
+    - name: Simular Construccion Docker
       run: |
-        echo "Construyendo la imagen Docker: docker build -t it4-app:latest ."
+        echo "Construyendo la imagen Docker..."
         docker build -t it4-app:latest .
 
-    - name: Simular Despliegue en Kubernetes (Release Management)
+    - name: Simular Despliegue K8s
       run: |
-        echo "Aplicando manifiestos en el clúster K8s..."
+        echo "Aplicando manifiestos en el cluster K8s..."
         echo "kubectl apply -f k8s/deployment.yaml"
         echo "kubectl apply -f k8s/service.yaml"
-        echo "Despliegue completado exitosamente. Cumpliendo COBIT BAI03 e ITIL Release."
+        echo "Despliegue completado exitosamente."

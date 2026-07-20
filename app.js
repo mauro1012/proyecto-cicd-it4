@@ -4,7 +4,7 @@ const app = express();
 app.get('/', (req, res) => {
     res.status(200).json({ 
         status: "success", 
-        message: "Aplicación IT4+ funcionando correctamente en Kubernetes",
+        message: "Aplicacion automatizada IT4+ funcionando en Kubernetes con exito",
         framework: "Node.js"
     });
 });
